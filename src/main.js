@@ -3039,7 +3039,6 @@ const config = {
       debug: false,
     }
   },
-  scene: [GuideScene, GameScene, GameOverScene,LoadingScene]
-}
+scene: [LoadingScene,GuideScene, GameScene, GameOverScene]}
 
 const game = new Phaser.Game(config)
