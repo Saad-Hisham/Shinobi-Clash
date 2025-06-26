@@ -135,9 +135,11 @@ class GuideScene extends Phaser.Scene {
       fontFamily: 'Arial'
     }).setOrigin(0.5);
 
+
     const controls = [
       'A: Move Left',
       'D: Move Right',
+      'W: Jump',
       'SPACE: Teleport to nearest enemy',
       'SHIFT: Dash',
       'Left Mouse Click: Attack',
@@ -145,6 +147,7 @@ class GuideScene extends Phaser.Scene {
       'F: Throw shuriken',
       'E: Heal (if health bottles available)'
     ];
+
 
 
     const startY = 100;
