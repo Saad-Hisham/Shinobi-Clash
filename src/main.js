@@ -1766,7 +1766,7 @@ class GameScene extends Phaser.Scene {
     if (this.knight.anims.currentAnim?.key.includes("Attack") || this.knightHealth <= 0) return;
 
     const distance = Math.abs(this.knight.x - this.player.x);
-    if (distance <= 70 && (!this.knight.lastAttackDelay || currentTime - this.knight.lastAttackDelay >= 200)) {
+    if (distance <= 70 && (!this.knight.lastAttackDelay || currentTime - this.knight.lastAttackDelay >= 300)) {
       if (!this.knight.lastAttackDelay) {
         this.knight.lastAttackDelay = currentTime; 
         this.knight.setVelocityX(0);
@@ -1791,7 +1791,7 @@ class GameScene extends Phaser.Scene {
           playerFacingKnight &&
           ((animation.key === "KnightAttack1" && frame.index === 1) ||
             (animation.key === "KnightAttack2" && frame.index === 5)) &&
-          (!this.lastKnightDamageTime || currentTime - this.lastKnightDamageTime > 500)
+          (!this.lastKnightDamageTime || currentTime - this.lastKnightDamageTime > 1500)
         ) {
           const playerAnim = this.player.anims.currentAnim?.key;
           if (playerAnim === "deff" && playerAnim !== "reflect") {
@@ -3039,6 +3039,7 @@ const config = {
       debug: false,
     }
   },
-scene: [LoadingScene,GuideScene, GameScene, GameOverScene]}
+  scene: [LoadingScene,GuideScene, GameScene, GameOverScene]
+}
 
 const game = new Phaser.Game(config)
