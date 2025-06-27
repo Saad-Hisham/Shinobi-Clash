@@ -18,13 +18,13 @@ class LoadingScene extends Phaser.Scene {
     // Create loading bar background
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
-    
+
     this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
-    
-    const progressBar = this.add.rectangle(width/2, height/2, 300, 30, 0x4a4a4a).setOrigin(0.5);
-    const progressFill = this.add.rectangle(width/2 - 145, height/2, 0, 26, 0xffffff).setOrigin(0, 0.5);
-    
-    this.add.text(width/2, height/2 - 50, 'Loading...', {
+
+    const progressBar = this.add.rectangle(width / 2, height / 2, 300, 30, 0x4a4a4a).setOrigin(0.5);
+    const progressFill = this.add.rectangle(width / 2 - 145, height / 2, 0, 26, 0xffffff).setOrigin(0, 0.5);
+
+    this.add.text(width / 2, height / 2 - 50, 'Loading...', {
       fontSize: '24px',
       color: '#ffffff',
       fontFamily: 'Arial'
@@ -101,7 +101,7 @@ class LoadingScene extends Phaser.Scene {
     this.load.image("earth", "/assets/envoirment/earth.png");
     this.load.image("stont-w-g", "/assets/envoirment/stont-w-g.png");
     this.load.image("grass", "/assets/envoirment/grass.png");
-24.2
+    24.2
     this.load.image("lower-grass", "/assets/envoirment/lower-grass.png");
     this.load.image("sea", "/assets/envoirment/sea.png");
     this.load.image("clouds", "/assets/envoirment/clouds.png");
@@ -127,6 +127,8 @@ class GuideScene extends Phaser.Scene {
   }
 
   create() {
+
+
     this.add.rectangle(0, 0, sizes.width, sizes.height, 0x000000, 0.7).setOrigin(0);
 
     this.add.text(sizes.width / 2, 50, 'Game Controls', {
@@ -134,7 +136,6 @@ class GuideScene extends Phaser.Scene {
       color: '#ffffff',
       fontFamily: 'Arial'
     }).setOrigin(0.5);
-
 
     const controls = [
       'A: Move Left',
@@ -147,7 +148,6 @@ class GuideScene extends Phaser.Scene {
       'F: Throw shuriken',
       'E: Heal (if health bottles available)'
     ];
-
 
 
     const startY = 100;
@@ -163,7 +163,12 @@ class GuideScene extends Phaser.Scene {
         wordWrap: { width: maxTextWidth }
       }).setOrigin(0.5);
     });
-
+    const devolper = "Developed with love by Saad hesham"
+    this.add.text(sizes.width / 2, sizes.height - 20, devolper, {
+      fontSize: '30px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5);
 
 
     const graphics = this.add.graphics();
@@ -213,8 +218,15 @@ class GameOverScene extends Phaser.Scene {
     this.add.rectangle(0, 0, sizes.width, sizes.height, 0x000000, 0.8).setOrigin(0);
 
     const message = this.gameResult === 'win' ? 'You Win!' : 'Game Over!';
+    const devolper = "Developed with love by Saad hesham"
     this.add.text(sizes.width / 2, sizes.height / 2 - 50, message, {
       fontSize: '48px',
+      color: '#ffffff',
+      fontFamily: 'Arial'
+    }).setOrigin(0.5);
+
+    this.add.text(sizes.width / 2, sizes.height - 50, devolper, {
+      fontSize: '30px',
       color: '#ffffff',
       fontFamily: 'Arial'
     }).setOrigin(0.5);
@@ -222,7 +234,7 @@ class GameOverScene extends Phaser.Scene {
 
     const button = this.add.rectangle(sizes.width / 2, sizes.height / 2 + 50, 200, 50, 0x4a4a4a)
       .setInteractive();
-    const buttonText = this.add.text(sizes.width / 2, sizes.height / 2 + 50, 'Restart', {
+    const buttonText = this.add.text(sizes.width / 2, sizes.height / 2 + 50, 'Play Again', {
       fontSize: '24px',
       color: '#ffffff',
       fontFamily: 'Arial'
@@ -1674,7 +1686,7 @@ class GameScene extends Phaser.Scene {
     const currentTime = this.time.now;
 
     if (this.heavyHealth <= 0 || heavy.anims.currentAnim?.key === "HeavyDie") {
-      return; 
+      return;
     }
 
     if (!this.lastHeavyShurikenDamageTime || currentTime - this.lastHeavyShurikenDamageTime > 100) {
@@ -1707,8 +1719,8 @@ class GameScene extends Phaser.Scene {
     }
 
     const currentTime = this.time.now;
-   
-    this.knightHealth -= 0.5;  
+
+    this.knightHealth -= 0.5;
     this.drawKnightHearts();
     this.getHit.play();
 
@@ -1771,9 +1783,9 @@ class GameScene extends Phaser.Scene {
     const distance = Math.abs(this.knight.x - this.player.x);
     if (distance <= 70 && (!this.knight.lastAttackDelay || currentTime - this.knight.lastAttackDelay >= 300)) {
       if (!this.knight.lastAttackDelay) {
-        this.knight.lastAttackDelay = currentTime; 
+        this.knight.lastAttackDelay = currentTime;
         this.knight.setVelocityX(0);
-        this.knight.play("KnightIdle", true); 
+        this.knight.play("KnightIdle", true);
         return;
       }
 
@@ -1784,7 +1796,7 @@ class GameScene extends Phaser.Scene {
       this.knight.play(randomAttack, true);
       this.knight.setSize(50, 50).setOffset(this.knight.flipX ? 10 : 30, 14);
 
-      this.knight.off('animationupdate'); 
+      this.knight.off('animationupdate');
       this.knight.on('animationupdate', (animation, frame) => {
         const playerFacingKnight =
           (this.knight.flipX && this.player.x < this.knight.x) ||
@@ -1815,7 +1827,7 @@ class GameScene extends Phaser.Scene {
         if (this.knightHealth > 0 && this.knight.active) {
           this.knight.play("KnightIdle", true);
           this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14);
-          this.knight.lastAttackDelay = null; 
+          this.knight.lastAttackDelay = null;
         }
       });
     }
@@ -1824,8 +1836,8 @@ class GameScene extends Phaser.Scene {
   playSequence(animations, onComplete) {
     if (animations.length === 0) {
       this.knight.play("KnightIdle", true);
-      this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14); 
-      if (onComplete) onComplete(); 
+      this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14);
+      if (onComplete) onComplete();
       return;
     }
 
@@ -1833,10 +1845,10 @@ class GameScene extends Phaser.Scene {
 
     if (currentAnim.includes("Attack")) {
       if (!this.knight.flipX) {
-      
+
         this.knight.setSize(40, 50).setOffset(40, 14);
       } else {
-        this.knight.setSize(40, 50).setOffset(10, 14); 
+        this.knight.setSize(40, 50).setOffset(10, 14);
       }
     } else {
       this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14);
@@ -1844,7 +1856,7 @@ class GameScene extends Phaser.Scene {
 
     this.knight.play(currentAnim, true);
     this.knight.once("animationcomplete", () => {
-      this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14); 
+      this.knight.setSize(30, 50).setOffset(this.knight.flipX ? 10 : 22, 14);
       this.playSequence(animations, onComplete);
     });
   }
@@ -1910,11 +1922,11 @@ class GameScene extends Phaser.Scene {
 
 
             this.Blood.knight = knight;
-            knight.setOffset(30, -6); 
+            knight.setOffset(30, -6);
 
             this.Blood.once("animationcomplete-Blood", () => {
-              this.Blood.destroy(); 
-              knight.anims.resume(); 
+              this.Blood.destroy();
+              knight.anims.resume();
               knight.once("animationcomplete-KnightDie", () => {
                 this.Blood = null;
               });
@@ -1946,7 +1958,7 @@ class GameScene extends Phaser.Scene {
       return;
     }
 
-    
+
     if (currentAnim?.includes('HunterAttack') && (!this.lastDamageTime || currentTime - this.lastDamageTime > 500)) {
       if (playerAnim === "deff" && playerAnim !== "reflect") {
         if (playerFacingHunter) {
@@ -1975,7 +1987,7 @@ class GameScene extends Phaser.Scene {
       this.drawHunterHearts();
       hunter.play("HunterHurt", true);
       this.getHit.play();
-      this.lastPlayerAttackAnim = playerAnim; 
+      this.lastPlayerAttackAnim = playerAnim;
 
       if (this.hunterHealth <= 0) {
         hunter.setVelocityX(0);
@@ -2006,7 +2018,7 @@ class GameScene extends Phaser.Scene {
     this.getHit.play();
 
     this.hunterIsAttacking = false;
-    hunter.removeAllListeners('animationcomplete'); 
+    hunter.removeAllListeners('animationcomplete');
 
     if (this.hunterHealth <= 0) {
       hunter.setVelocityX(0);
@@ -2111,7 +2123,7 @@ class GameScene extends Phaser.Scene {
           this.knight.setVelocityX(-350);
           this.knight.play("KnightRun", true);
           this.knight.setSize(30, 50).setOffset(20, 14);
-          this.knight.lastAttackDelay = null; 
+          this.knight.lastAttackDelay = null;
         } else {
           this.knight.setVelocityX(0);
           this.knightAttack();
@@ -2120,7 +2132,7 @@ class GameScene extends Phaser.Scene {
         this.knight.setVelocityX(0);
         this.knight.play("KnightIdle", true);
         this.knight.setSize(30, 50).setOffset(10, 14);
-        this.knight.lastAttackDelay = null; 
+        this.knight.lastAttackDelay = null;
       }
     } else {
       this.knight.flipX = false;
@@ -2130,7 +2142,7 @@ class GameScene extends Phaser.Scene {
           this.knight.setVelocityX(350);
           this.knight.play("KnightRun", true);
           this.knight.setSize(30, 50).setOffset(30, 14);
-          this.knight.lastAttackDelay = null; 
+          this.knight.lastAttackDelay = null;
         } else {
           this.knight.setVelocityX(0);
           this.knightAttack();
@@ -2139,7 +2151,7 @@ class GameScene extends Phaser.Scene {
         this.knight.setVelocityX(0);
         this.knight.play("KnightIdle", true);
         this.knight.setSize(30, 50).setOffset(22, 14);
-        this.knight.lastAttackDelay = null; 
+        this.knight.lastAttackDelay = null;
       }
     }
   }
@@ -2147,7 +2159,7 @@ class GameScene extends Phaser.Scene {
   hunterHandler() {
     if (this.hunterHealth <= 0) {
       this.hunter.setVelocityX(0);
-      return; 
+      return;
     }
 
     const distanceX = Math.abs(this.player.x - this.hunter.x);
@@ -2156,12 +2168,12 @@ class GameScene extends Phaser.Scene {
 
     const currentAnim = this.hunter.anims?.currentAnim?.key;
     if (
-      currentAnim?.includes('HunterAttack') || 
+      currentAnim?.includes('HunterAttack') ||
       currentAnim === 'jump' ||
       currentAnim === 'fall' ||
       currentAnim === 'HunterHurt'
     ) {
-      return; 
+      return;
     }
 
     if (distanceX <= 900) {
@@ -2171,7 +2183,7 @@ class GameScene extends Phaser.Scene {
           this.hunter.setFlipX(true);
           this.hunter.setSize(42, 40).setOffset(48, 57);
         } else {
-          this.hunter.setVelocityX(350); 
+          this.hunter.setVelocityX(350);
           this.hunter.setFlipX(false);
           this.hunter.setSize(42, 40).setOffset(60, 57);
         }
@@ -2212,7 +2224,7 @@ class GameScene extends Phaser.Scene {
     this.getHit.play();
 
     this.hunterIsAttacking = false;
-    hunter.removeAllListeners('animationcomplete'); 
+    hunter.removeAllListeners('animationcomplete');
 
     if (this.hunterHealth <= 0) {
       hunter.setVelocityX(0);
@@ -2282,7 +2294,7 @@ class GameScene extends Phaser.Scene {
       hunter.play("HunterHurt", true);
       this.getHit.play();
       this.hunterIsAttacking = false;
-      hunter.removeAllListeners('animationcomplete'); 
+      hunter.removeAllListeners('animationcomplete');
       this.lastPlayerAttackAnim = playerAnim;
 
       if (this.hunterHealth <= 0) {
@@ -2377,15 +2389,15 @@ class GameScene extends Phaser.Scene {
           }
           if (this.hunter.x <= 100 && this.hunter.body.velocity.x < 0) {
             this.hunter.setVelocityX(0);
-            this.hunter.x = 100; 
+            this.hunter.x = 100;
           } else if (this.hunter.x >= sizes.width - 100 && this.hunter.body.velocity.x > 0) {
             this.hunter.setVelocityX(0);
-            this.hunter.x = sizes.width - 100; 
+            this.hunter.x = sizes.width - 100;
           }
         };
 
         const boundaryEvent = this.time.addEvent({
-          delay: 16, 
+          delay: 16,
           callback: boundaryCheck,
           callbackScope: this,
           loop: true
@@ -2401,7 +2413,7 @@ class GameScene extends Phaser.Scene {
                 this.hunter.play('HunterIdle', true);
                 this.hunter.setSize(42, 40).setOffset(this.hunter.flipX ? 48 : 60, 57);
                 this.hunter.setVelocityX(0);
-                boundaryEvent.remove(); 
+                boundaryEvent.remove();
                 this.time.delayedCall(100, () => {
                   if (this.hunter?.active && this.hunterIsAttacking) {
                     playNext();
@@ -2417,7 +2429,7 @@ class GameScene extends Phaser.Scene {
               }
             });
           } else {
-            boundaryEvent.remove(); 
+            boundaryEvent.remove();
           }
         });
       } else {
@@ -2479,7 +2491,7 @@ class GameScene extends Phaser.Scene {
       return;
     }
 
-    if (distance <= 700) { 
+    if (distance <= 700) {
       if (heavyFrontOfPlayer) {
         this.heavy.flipX = true;
         if (distance > 70) {
@@ -2488,12 +2500,12 @@ class GameScene extends Phaser.Scene {
           this.heavy.setSize(40, 60).setOffset(30, 30);
 
 
-        } else { 
+        } else {
           this.heavy.setVelocityX(0);
           if (this.heavy.anims.currentAnim?.key !== "heavyAttack") {
             this.heavy.play("heavyAttack", true);
             this.heavy.setSize(60, 60).setOffset(10, 30);
-            this.heavy.lastAttackTime = currentTime; 
+            this.heavy.lastAttackTime = currentTime;
             this.heavy.once('animationcomplete-heavyAttack', () => {
               this.heavy.play("HeavyIdle", true);
               this.heavy.setSize(40, 60).setOffset(30, 30);
@@ -2675,7 +2687,7 @@ class GameScene extends Phaser.Scene {
         { sprite: this.heavy, x: this.heavy.x, health: this.heavyHealth },
         { sprite: this.hunter, x: this.hunter.x, health: this.hunterHealth }
       ].filter(enemy =>
-        enemy.health > 0 && 
+        enemy.health > 0 &&
         enemy.x >= cameraX && enemy.x <= cameraX + screenWidth
       );
 
@@ -2689,15 +2701,15 @@ class GameScene extends Phaser.Scene {
         return closest;
       }, null);
 
-      if (!nearestEnemy) return; 
+      if (!nearestEnemy) return;
 
       this.isTeleporting = true;
       const startLight = this.add.sprite(this.player.x, this.player.y + this.player.height * .5, "light").setScale(3);
       startLight.play("light");
 
-      if (this.player.active) { 
+      if (this.player.active) {
         this.player.x = nearestEnemy.x + (nearestEnemy.x < this.player.x ? 100 : -100);
-        this.player.flipX = nearestEnemy.x < this.player.x; 
+        this.player.flipX = nearestEnemy.x < this.player.x;
 
 
 
@@ -2719,8 +2731,8 @@ class GameScene extends Phaser.Scene {
       let knightIsDead = this.knightHealth <= 0;
       const screenWidth = this.sys.game.config.width;
       const cameraX = this.cameras.main.scrollX;
-      const heavyLeftEdge = this.heavy.x - 96; 
-      const heavyRightEdge = this.heavy.x + 96; 
+      const heavyLeftEdge = this.heavy.x - 96;
+      const heavyRightEdge = this.heavy.x + 96;
       const heavyInView = heavyLeftEdge >= cameraX && heavyRightEdge <= cameraX + screenWidth;
       const hunterLeftEdge = this.hunter.x - 75;
       const hunterRightEdge = this.hunter.x + 75;
@@ -2911,7 +2923,7 @@ class GameScene extends Phaser.Scene {
       const heavyLeftEdge = this.heavy.x - 96;
       const heavyRightEdge = this.heavy.x + 96;
       const heavyInView = heavyLeftEdge >= cameraX && heavyRightEdge <= cameraX + screenWidth;
-      const hunterLeftEdge = this.hunter.x - 75; 
+      const hunterLeftEdge = this.hunter.x - 75;
       const hunterRightEdge = this.hunter.x + 75;
       const hunterInView = hunterLeftEdge >= cameraX && hunterRightEdge <= cameraX + screenWidth;
       if (!this.isAttacking && !this.isDashing) {
@@ -3042,7 +3054,7 @@ const config = {
       debug: false,
     }
   },
-  scene: [LoadingScene,GuideScene, GameScene, GameOverScene]
+  scene: [LoadingScene, GuideScene, GameScene, GameOverScene]
 }
 
 const game = new Phaser.Game(config)
