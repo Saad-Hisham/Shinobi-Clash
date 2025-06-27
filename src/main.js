@@ -18,7 +18,7 @@ class LoadingScene extends Phaser.Scene {
     // Create loading bar background
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
-
+    this.add.image(0, 0, 'background').setOrigin(0).setDisplaySize(sizes.width, sizes.height);
     this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0);
 
     const progressBar = this.add.rectangle(width / 2, height / 2, 300, 30, 0x4a4a4a).setOrigin(0.5);
@@ -126,8 +126,14 @@ class GuideScene extends Phaser.Scene {
     super("scene-guide");
   }
 
+    preload() {
+    // Load the background image
+    this.load.image('background', '/assets/envoirment/bg.jpg');
+  }
+
   create() {
 
+    this.add.image(0, 0, 'background').setOrigin(0).setDisplaySize(sizes.width, sizes.height);
 
     this.add.rectangle(0, 0, sizes.width, sizes.height, 0x000000, 0.7).setOrigin(0);
 
@@ -209,12 +215,19 @@ class GameOverScene extends Phaser.Scene {
   constructor() {
     super("scene-game-over");
   }
+      preload() {
+    // Load the background image
+    this.load.image('background', '/assets/envoirment/bg.jpg');
+  }
+
 
   init(data) {
     this.gameResult = data.result;
   }
 
   create() {
+    this.add.image(0, 0, 'background').setOrigin(0).setDisplaySize(sizes.width, sizes.height);
+
     this.add.rectangle(0, 0, sizes.width, sizes.height, 0x000000, 0.8).setOrigin(0);
 
     const message = this.gameResult === 'win' ? 'You Win!' : 'Game Over!';
