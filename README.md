@@ -34,4 +34,3 @@ The game is a **2D side-scroller** with intense boss battles — perfect for qui
 
 ---
 
-## 📂 Project Structure (quick overview)
